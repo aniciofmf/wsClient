@@ -4,7 +4,11 @@ import "./style.css";
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <h1> wsClient </h1>
-    <span>Offline</span>    
+    <span id="status">Offline</span>    
+    
+    <ul id="list">
+      <li></li>
+    </ul>
   </div>
 `;
 
