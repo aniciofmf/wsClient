@@ -7,14 +7,16 @@ export const connect = () => {
 
 	const socket = ioManager.socket("/");
 
-	statusListener(socket);
+	setListeners(socket);
 };
 
-const statusListener = (socket: Socket) => {
+const setListeners = (socket: Socket) => {
 	const statusLabel = document.querySelector<HTMLSpanElement>("#status")!;
 	const clientsListLabel = document.querySelector<HTMLUListElement>("#list")!;
 	const msgform = document.querySelector<HTMLFormElement>("#msgform")!;
 	const msg = document.querySelector<HTMLInputElement>("#msg")!;
+	const msgListLabel = document.querySelector<HTMLUListElement>("#msglist")!;
+
 	let clientId: string | null = null;
 
 	socket.on("connect", () => {
@@ -38,11 +40,22 @@ const statusListener = (socket: Socket) => {
 		clientsListLabel.innerHTML = clsHtml;
 	});
 
+	socket.on("server:messages", (payload: { id: string; msg: string }) => {
+		let htmlEl = document.createElement("li");
+
+		htmlEl.innerHTML = `
+        <strong>clientId: ${payload.id}</strong>
+        <strong>Msg: ${payload.msg}</strong>
+        `;
+
+		msgListLabel.appendChild(htmlEl);
+	});
+
 	msgform?.addEventListener("submit", (ev) => {
 		ev.preventDefault();
 
 		if (msg.value.trim().length > 0) {
-			socket.emit("clients:msg", {
+			socket.emit("clients:messages", {
 				id: clientId,
 				msg: msg.value,
 			});

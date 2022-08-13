@@ -13,6 +13,10 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <form id="msgform">
       <input placeholder="msg" id="msg" />
     </form>
+
+    <h3>Msgs</h3>
+    <ul id="msglist"></ul>
+    
   </div>
 `;
 
