@@ -28,6 +28,10 @@ const setListeners = (socket: Socket) => {
 		clientId = socket.id;
 	});
 
+	socket.on("server:autherror", (payload: { msg: string }) => {
+		console.log(payload.msg);
+	});
+
 	socket.on("disconnect", () => {
 		statusLabel!.innerHTML = "Disconnected";
 		clientId = null;
@@ -44,11 +48,11 @@ const setListeners = (socket: Socket) => {
 		clientsListLabel.innerHTML = clsHtml;
 	});
 
-	socket.on("server:messages", (payload: { id: string; msg: string }) => {
+	socket.on("server:messages", (payload: { name: string; msg: string }) => {
 		let htmlEl = document.createElement("li");
 
 		htmlEl.innerHTML = `
-        <strong>clientId: ${payload.id}</strong>
+        <strong>Name: ${payload.name}</strong>
         <strong>Msg: ${payload.msg}</strong>
         `;
 
