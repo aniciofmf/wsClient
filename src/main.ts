@@ -3,11 +3,16 @@ import "./style.css";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
-    <h1> wsClient </h1>
+    <h2> wsClient </h2>
+
+    <input id="token" placeholder="Place your token" />
+    <button id="connect">Send</button>
+
+    <br/><br/>
+
     <span id="status">Offline</span>    
     
     <ul id="list">
-      <li></li>
     </ul>
 
     <form id="msgform">
@@ -16,8 +21,15 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
     <h3>Msgs</h3>
     <ul id="msglist"></ul>
-    
+
   </div>
 `;
 
-connect();
+const token = document.querySelector<HTMLInputElement>("#token");
+const btnConnect = document.querySelector<HTMLButtonElement>("#connect");
+
+btnConnect?.addEventListener("click", () => {
+	if (token!.value.trim().length > 0) {
+		connect(token!.value);
+	}
+});
