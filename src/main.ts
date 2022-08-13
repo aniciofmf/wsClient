@@ -9,6 +9,10 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <ul id="list">
       <li></li>
     </ul>
+
+    <form id="msgform">
+      <input placeholder="msg" id="msg" />
+    </form>
   </div>
 `;
 
