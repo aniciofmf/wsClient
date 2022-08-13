@@ -28,8 +28,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 const token = document.querySelector<HTMLInputElement>("#token");
 const btnConnect = document.querySelector<HTMLButtonElement>("#connect");
 
-btnConnect?.addEventListener("click", () => {
-	if (token!.value.trim().length > 0) {
-		connect(token!.value);
-	}
-});
+if (btnConnect)
+	btnConnect.addEventListener("click", () => {
+		if (token!.value.trim().length > 0) {
+			connect(token!.value);
+		}
+	});

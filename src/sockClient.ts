@@ -55,7 +55,7 @@ const setListeners = (socket: Socket) => {
 		msgListLabel.appendChild(htmlEl);
 	});
 
-	msgform?.addEventListener("submit", (ev) => {
+	msgform!.addEventListener("submit", (ev) => {
 		ev.preventDefault();
 
 		if (msg.value.trim().length > 0) {
